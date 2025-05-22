@@ -1,8 +1,10 @@
 package com.example.spring_product_api.service;
 
 import com.example.spring_product_api.repository.*;
+import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
-import org.springframework.http.HttpStatus;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -18,33 +20,31 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
-    public ResponseServer findByNameSubstring(String name) {
+    public List<Product> findByNameSubstring(String name) {
         try {
-            return new ResponseServer(true, HttpStatus.OK, List.of(""), productRepository.findByNameContainingIgnoreCase(name));
+            return productRepository.findByNameContainingIgnoreCase(name);
         } catch (Exception exception) {
-            return new ResponseServer(false, HttpStatus.BAD_REQUEST, List.of("Неизвестная ошибка: ", exception.getMessage()), new Product());
+            return List.of(new Product());
         }
     }
 
-    public ResponseServer findAll() {
+    public List<Product> findAll() {
         try {
-            return new ResponseServer(true, HttpStatus.OK, List.of(""), productRepository.findAll());
+            return productRepository.findAll();
         } catch (Exception exception) {
-            return new ResponseServer(false, HttpStatus.BAD_REQUEST, List.of("Неизвестная ошибка: ", exception.getMessage()), new Product());
+            return List.of(new Product());
         }
     }
 
-    public ResponseServer findById(Long id) {
-        Optional<Product> optionalProduct = productRepository.findById(id);
-        Product product = optionalProduct.orElseThrow(() -> new ProductNotFoundException(HttpStatus.NOT_FOUND, "продукт с таким id: " + id + " не найден"));
-        return new ResponseServer(true, HttpStatus.OK, List.of(""), product);
+    public Product findById(Long id) {
+        return productRepository.findById(id).orElse(null); // Возвращаем null, если не найден
     }
 
-    public ResponseServer create(ProductDto productDto) {
+
+    public Product create(ProductDto productDto) {
         try {
             if (productRepository.findByName(productDto.getName()).isPresent()) {
-                return new ResponseServer(false, HttpStatus.BAD_REQUEST, List.of("Продукт с таким именем существует"), new Product());
-
+                return null;
             }
 
             Product product = new Product();
@@ -53,49 +53,45 @@ public class ProductService {
             product.setDescription(productDto.getDescription());
             product.setOrderDateTime(LocalDate.now());
 
-            Product savedProduct = productRepository.save(product);
-            return new ResponseServer(true, HttpStatus.OK, List.of("Продукт успешно создан"), savedProduct);
+            return productRepository.save(product);
 
         } catch (Exception exception) {
-            return new ResponseServer(false, HttpStatus.BAD_REQUEST, List.of("Неизвестная ошибка", exception.getMessage()), new Product());
+            System.err.println("Ошибка при создании продукта: " + exception.getMessage());
+            return null;
         }
-
     }
 
-    public ResponseServer delete(Long id) {
+    public Product delete(Long id) {
         Optional<Product> optionalProduct = productRepository.findById(id);
-        Product product = optionalProduct.orElseThrow(() -> new ProductNotFoundException(HttpStatus.NOT_FOUND, "продукт с таким id: " + id + " не найден"));
+        if (optionalProduct.isEmpty()) return new Product();
+        Product product = optionalProduct.get();
         productRepository.deleteById(id);
 
-        return new ResponseServer(true, HttpStatus.OK, List.of("Продукт успешно удалён"), new Product());
+        return product;
     }
 
+    /*@Transactional
+    public Product update(@NotNull Long id, @Valid ProductDto productDto) {
+        Optional<Product> optionalProduct = productRepository.findById(id);
+
+        Product product = optionalProduct.get();
+
+        product.setName(productDto.getName());
+        product.setPrice(productDto.getPrice());
+        product.setDescription(productDto.getDescription());
+        product.setOrderDateTime(productDto.getOrderDateTime());
+
+        return productRepository.save(product);
+    }*/
     @Transactional
-    public ResponseServer update(Long id, ProductDto productDto) {
-        try {
-            Optional<Product> optionalProduct = productRepository.findById(id);
+    public Product update(@NotNull Long id, @Valid ProductDto productDto) {
+        // Повторно получаем продукт. Если findById вернет null, это приведет к ошибке.
+        Product product = productRepository.findById(id)
+                .orElseThrow(() -> new EntityNotFoundException("Product not found with id: " + id));product.setName(productDto.getName());
+        product.setPrice(productDto.getPrice());
+        product.setDescription(productDto.getDescription());
+        product.setOrderDateTime(productDto.getOrderDateTime());
 
-            Product product = optionalProduct.orElseThrow(() -> new ProductNotFoundException(HttpStatus.NOT_FOUND, "продукт с таким id: " + id + " не найден"));
-
-            if (productDto.getName() != null) {
-                product.setName(productDto.getName());
-            }
-
-            if (productDto.getPrice() != null) {
-                product.setPrice(productDto.getPrice());
-            }
-
-            if (productDto.getDescription() != null) {
-                product.setDescription(productDto.getDescription());
-            }
-
-            if (productDto.getOrderDateTime() != null) {
-                product.setOrderDateTime(productDto.getOrderDateTime());
-            }
-
-            return new ResponseServer(true, HttpStatus.OK, List.of("Продукт успешно обновлён"), product);
-        } catch (Exception exception) {
-            return new ResponseServer(false, HttpStatus.BAD_REQUEST, List.of("Неизвестная ошибка", exception.getMessage()), new Product());
-        }
+        return productRepository.save(product);
     }
 }
