@@ -39,7 +39,6 @@ public class ProductService {
         return productRepository.findById(id).orElse(null); // Возвращаем null, если не найден
     }
 
-
     public Product create(ProductDto productDto) {
         try {
             if (productRepository.findByName(productDto.getName()).isPresent()) {
