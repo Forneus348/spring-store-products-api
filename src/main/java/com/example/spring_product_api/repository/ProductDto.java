@@ -1,8 +1,6 @@
 package com.example.spring_product_api.repository;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.PositiveOrZero;
+import jakarta.validation.constraints.*;
 import lombok.*;
 import java.time.LocalDate;
 
@@ -15,7 +13,7 @@ public class ProductDto {
     private String name;
     @NotNull(message = "Price cannot be null")
     private Double price;
-    @PositiveOrZero(message = "Price must be positive or zero")
+    @NotBlank(message = "Description cannot be null")
     private String description;
     private LocalDate orderDateTime;
 }

@@ -8,8 +8,7 @@ import jakarta.validation.constraints.NotNull;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class ProductService {
@@ -70,24 +69,11 @@ public class ProductService {
         return product;
     }
 
-    /*@Transactional
-    public Product update(@NotNull Long id, @Valid ProductDto productDto) {
-        Optional<Product> optionalProduct = productRepository.findById(id);
-
-        Product product = optionalProduct.get();
-
-        product.setName(productDto.getName());
-        product.setPrice(productDto.getPrice());
-        product.setDescription(productDto.getDescription());
-        product.setOrderDateTime(productDto.getOrderDateTime());
-
-        return productRepository.save(product);
-    }*/
     @Transactional
     public Product update(@NotNull Long id, @Valid ProductDto productDto) {
-        // Повторно получаем продукт. Если findById вернет null, это приведет к ошибке.
         Product product = productRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Product not found with id: " + id));product.setName(productDto.getName());
+                .orElseThrow(() -> new EntityNotFoundException("Product not found with id: " + id));
+        product.setName(productDto.getName());
         product.setPrice(productDto.getPrice());
         product.setDescription(productDto.getDescription());
         product.setOrderDateTime(productDto.getOrderDateTime());
