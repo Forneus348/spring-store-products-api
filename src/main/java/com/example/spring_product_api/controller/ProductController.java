@@ -2,11 +2,9 @@ package com.example.spring_product_api.controller;
 
 import com.example.spring_product_api.repository.Product;
 import com.example.spring_product_api.repository.ProductDto;
-import com.example.spring_product_api.repository.User;
 import com.example.spring_product_api.service.ProductService;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,7 +17,6 @@ import java.util.Map;
 @RestController
 @RequestMapping(path = "api/products")
 public class ProductController {
-    @Autowired
     private final ProductService productService;
 
     public ProductController(ProductService productService) {
@@ -35,7 +32,11 @@ public class ProductController {
     }
 
     @GetMapping(path = "/search/{name}")
-    public ResponseEntity<Map<String, Object>> findByRegistr(@PathVariable String name) {
+    public ResponseEntity<Map<String, Object>> findByNameSubstring(
+            @PathVariable String name,
+            HttpSession session
+    ) {
+        checkAuth(session);
         List<Product> products = productService.findByNameSubstring(name);
         Map<String, Object> response = createResponse(
                 HttpStatus.OK.value(),
@@ -46,13 +47,18 @@ public class ProductController {
     }
 
     @GetMapping
-    public ResponseEntity<Map<String, Object>> findAll() {
+    public ResponseEntity<Map<String, Object>> findAll(HttpSession session) {
+        checkAuth(session);
         List<Product> products = productService.findAll();
         return ResponseEntity.ok(createResponse(HttpStatus.OK.value(), List.of(), products));
     }
 
     @GetMapping(path = "{id}")
-    public ResponseEntity<Map<String, Object>> findById(@PathVariable Long id) {
+    public ResponseEntity<Map<String, Object>> findById(
+            @PathVariable Long id,
+            HttpSession session
+    ) {
+        checkAuth(session);
         Product product = productService.findById(id);
         if (product == null) {
             Map<String, Object> response = createResponse(
@@ -66,7 +72,11 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<Map<String, Object>> create(@RequestBody ProductDto productDto) {
+    public ResponseEntity<Map<String, Object>> create(
+            @RequestBody ProductDto productDto,
+            HttpSession session
+    ) {
+        checkAuth(session);
         Product product = productService.create(productDto);
         if (product == null) {
             Map<String, Object> response = createResponse(
@@ -85,7 +95,11 @@ public class ProductController {
     }
 
     @DeleteMapping(path = "{id}")
-    public ResponseEntity<Map<String, Object>> delete(@PathVariable(name = "id") Long id) {
+    public ResponseEntity<Map<String, Object>> delete(
+            @PathVariable(name = "id") Long id,
+            HttpSession session
+    ) {
+        checkAuth(session);
         Product product = productService.findById(id);
         if (product == null) {
             Map<String, Object> response = createResponse(
@@ -102,8 +116,10 @@ public class ProductController {
     @PutMapping(path = "{id}")
     public ResponseEntity<Map<String, Object>> update(
             @PathVariable Long id,
-            @Valid @RequestBody ProductDto productDto
+            @Valid @RequestBody ProductDto productDto,
+            HttpSession session
     ) {
+        checkAuth(session);
         Product existingProduct = productService.findById(id);
         if (existingProduct == null) {
             Map<String, Object> response = createResponse(
@@ -125,5 +141,11 @@ public class ProductController {
         }
 
         return ResponseEntity.ok(createResponse(HttpStatus.OK.value(), List.of(), updatedProduct));
+    }
+
+    private void checkAuth(HttpSession session) {
+        if (session.getAttribute("user") == null) {
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Not authorized!");
+        }
     }
 }
