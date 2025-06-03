@@ -2,12 +2,15 @@ package com.example.spring_product_api.controller;
 
 import com.example.spring_product_api.repository.Product;
 import com.example.spring_product_api.repository.ProductDto;
+import com.example.spring_product_api.repository.User;
 import com.example.spring_product_api.service.ProductService;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.LinkedHashMap;
 import java.util.List;
