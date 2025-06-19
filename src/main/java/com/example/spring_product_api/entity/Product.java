@@ -1,7 +1,10 @@
-package com.example.spring_product_api.repository;
+package com.example.spring_product_api.entity;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import java.time.LocalDate;
 
 @Entity

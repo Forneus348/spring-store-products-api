@@ -1,41 +1,41 @@
 package com.example.spring_product_api.config;
 
+import com.example.spring_product_api.filter.JwtFilter;
+import com.example.spring_product_api.handler.CustomAccessDeniedHandler;
+import com.example.spring_product_api.handler.CustomLogoutHandler;
+import com.example.spring_product_api.service.UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
-import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.HttpStatusEntryPoint;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 
 @Configuration
-@EnableMethodSecurity
+@EnableWebSecurity
 public class SecurityConfig {
-    private final UserDetailsService userDetailsService;
+    /*класс для аутентификации/авторизации, управления доступом к эндпоинтам*/
+    private final JwtFilter jwtFIlter;
+    private final UserService userService;
+    private final CustomAccessDeniedHandler accessDeniedHandler;
+    private final CustomLogoutHandler customLogoutHandler;
 
-    public SecurityConfig(UserDetailsService userDetailsService) {
-        this.userDetailsService = userDetailsService;
-    }
-
-    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
-                .csrf(csrf -> csrf.disable())
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
-                        .requestMatchers("/welcome").permitAll()
-                        .requestMatchers("/users").hasAuthority("USER")
-                        .requestMatchers("/admins").hasAuthority("ADMIN")
-                        .requestMatchers("/all").authenticated()
-                        .requestMatchers("/api/products/**").authenticated()
-                        .anyRequest().authenticated()
-                )
-                .userDetailsService(userDetailsService)
-                .httpBasic();
-        return http.build();
+    public SecurityConfig(JwtFilter jwtFIlter,
+                          UserService userService,
+                          CustomAccessDeniedHandler accessDeniedHandler, CustomLogoutHandler customLogoutHandler) {
+        this.jwtFIlter = jwtFIlter;
+        this.userService = userService;
+        this.accessDeniedHandler = accessDeniedHandler;
+        this.customLogoutHandler = customLogoutHandler;
     }
 
     @Bean
@@ -46,5 +46,32 @@ public class SecurityConfig {
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration config) throws Exception {
         return config.getAuthenticationManager();
+    }
+
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http.csrf(AbstractHttpConfigurer::disable);
+
+        http.authorizeHttpRequests(auth -> {
+                    auth.requestMatchers("/login/**","/registration/**", "/css/**", "/refresh_token/**", "/")
+                            .permitAll();
+                    auth.requestMatchers("/admin/**").hasAuthority("ADMIN");
+                    auth.requestMatchers("/api/products/**").authenticated(); // Требуем аутентификацию для всех запросов к продуктам
+                    auth.anyRequest().authenticated();
+                }).userDetailsService(userService)
+                .exceptionHandling(e -> {
+                    e.accessDeniedHandler(accessDeniedHandler);
+                    e.authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED));
+                })
+                .sessionManagement(session -> session.sessionCreationPolicy(STATELESS))
+                .addFilterBefore(jwtFIlter, UsernamePasswordAuthenticationFilter.class)
+                .logout(log -> {
+                    log.logoutUrl("/logout");
+                    log.addLogoutHandler(customLogoutHandler);
+                    log.logoutSuccessHandler((request, response, authentication) ->
+                            SecurityContextHolder.clearContext());
+                });
+
+        return http.build();
     }
 }
