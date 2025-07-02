@@ -27,7 +27,7 @@ public class ProductController {
         List<Product> products = productService.findByNameSubstring(name);
         Map<String, Object> response = createResponse(
                 HttpStatus.OK.value(),
-                products.isEmpty() ? List.of("Продукты не найдены") : List.of(),
+                products.isEmpty() ? List.of("No products found") : List.of(),
                 products
         );
         return ResponseEntity.ok(response);
@@ -45,7 +45,7 @@ public class ProductController {
         if (product == null) {
             Map<String, Object> response = createResponse(
                     HttpStatus.NOT_FOUND.value(),
-                    List.of("Продукт с id не найден: " + id),
+                    List.of("Product id not found: " + id),
                     null
             );
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
@@ -59,7 +59,7 @@ public class ProductController {
         if (product == null) {
             Map<String, Object> response = createResponse(
                     HttpStatus.BAD_REQUEST.value(),
-                    List.of("Неверные данные о продукте"),
+                    List.of("Incorrect product data"),
                     null
             );
             return ResponseEntity.badRequest().body(response);
@@ -78,7 +78,7 @@ public class ProductController {
         if (product == null) {
             Map<String, Object> response = createResponse(
                     HttpStatus.NOT_FOUND.value(),
-                    List.of("Продукт с id не найден: " + id),
+                    List.of("Product id not found: "+ id),
                     null
             );
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
@@ -96,7 +96,7 @@ public class ProductController {
         if (existingProduct == null) {
             Map<String, Object> response = createResponse(
                     HttpStatus.NOT_FOUND.value(),
-                    List.of("Продукт с id не найден: " + id),
+                    List.of("Product id not found: " + id),
                     null
             );
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(response);
@@ -106,7 +106,7 @@ public class ProductController {
         if (updatedProduct == null) {
             Map<String, Object> response = createResponse(
                     HttpStatus.BAD_REQUEST.value(),
-                    List.of("Проблема с обновлением"),
+                    List.of("Problem with update"),
                     null
             );
             return ResponseEntity.badRequest().body(response);

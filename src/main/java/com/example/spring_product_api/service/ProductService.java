@@ -55,7 +55,7 @@ public class ProductService {
             return productRepository.save(product);
 
         } catch (Exception exception) {
-            System.err.println("Ошибка при создании продукта: " + exception.getMessage());
+            System.err.println("Error creating product: " + exception.getMessage());
             return null;
         }
     }
@@ -72,7 +72,7 @@ public class ProductService {
     @Transactional
     public Product update(@NotNull Long id, @Valid ProductDto productDto) {
         Product product = productRepository.findById(id)
-                .orElseThrow(() -> new EntityNotFoundException("Продукт с id не найден: " + id));
+                .orElseThrow(() -> new EntityNotFoundException("Product id not found: " + id));
         product.setName(productDto.getName());
         product.setPrice(productDto.getPrice());
         product.setDescription(productDto.getDescription());

@@ -28,15 +28,15 @@ public class AuthenticationController {
             @RequestBody RegistrationRequestDto registrationDto
     ) {
         if (userService.existsByUsername(registrationDto.getUsername())) {
-            return ResponseEntity.badRequest().body("Имя пользователя уже занято");
+            return ResponseEntity.badRequest().body("Username is already taken");
         }
         if (userService.existsByEmail(registrationDto.getEmail())) {
-            return ResponseEntity.badRequest().body("Email уже занят");
+            return ResponseEntity.badRequest().body("Email is already taken");
         }
 
         authenticationService.register(registrationDto);
 
-        return ResponseEntity.ok("Регистрация прошла успешно");
+        return ResponseEntity.ok("Registration was successful");
     }
 
     @PostMapping("/login")

@@ -10,7 +10,9 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class CustomLogoutHandler implements LogoutHandler {
-    /*класс, отвечающий за то, чтобы токен не использовался после выхода пользователя из системы*/
+    private static final String BEARER_PREFIX = "Bearer ";
+    private static final int BEARER_PREFIX_LENGTH = BEARER_PREFIX.length();
+
     private final TokenRepository tokenRepository;
 
     public CustomLogoutHandler(TokenRepository tokenRepository) {
@@ -24,11 +26,11 @@ public class CustomLogoutHandler implements LogoutHandler {
 
         String authHeader = request.getHeader("Authorization");
 
-        if (authHeader == null || !authHeader.startsWith("Bearer ")) {
+        if (authHeader == null || !authHeader.startsWith(BEARER_PREFIX)) {
             return;
         }
 
-        String token = authHeader.substring(7);
+        String token = authHeader.substring(BEARER_PREFIX_LENGTH);
 
         Token tokenEntity = tokenRepository.findByAccessToken(token).orElse(null);
 

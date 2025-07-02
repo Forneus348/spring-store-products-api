@@ -13,11 +13,11 @@ import java.time.LocalDate;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProductDto {
-    @NotBlank(message = "Имя не может быть пустым")
+    @NotBlank(message = "Name cannot be empty")
     private String name;
-    @NotNull(message = "Цена не может быть нулевой")
+    @NotNull(message = "The price cannot be zero")
     private Double price;
-    @NotBlank(message = "Описание не может быть нулевым")
+    @NotBlank(message = "Description cannot be null")
     private String description;
     private LocalDate orderDateTime;
 }
