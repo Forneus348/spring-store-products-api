@@ -5,67 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f9b38c4a-ea4e-4cd4-be85-56404571efd5" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/product-service/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/product-service/src/main/java/com/example/product_service/controller/ProductController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/product-service/src/main/resources/application.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/user-service/.gitattributes" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/user-service/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/user-service/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/user-service/mvnw" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/user-service/mvnw.cmd" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/user-service/src/main/java/com/example/user_service/UserServiceApplication.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/user-service/src/main/java/com/example/user_service/client/ProductServiceClient.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/user-service/src/main/java/com/example/user_service/controller/OrderController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/user-service/src/main/java/com/example/user_service/dto/OrderItemRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/user-service/src/main/java/com/example/user_service/dto/OrderItemResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/user-service/src/main/java/com/example/user_service/dto/OrderRequest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/user-service/src/main/java/com/example/user_service/dto/OrderResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/user-service/src/main/java/com/example/user_service/dto/ProductResponse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/user-service/src/main/java/com/example/user_service/entity/Order.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/user-service/src/main/java/com/example/user_service/entity/OrderItem.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/user-service/src/main/java/com/example/user_service/entity/Role.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/user-service/src/main/java/com/example/user_service/exception/GlobalExceptionHandler.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/user-service/src/main/java/com/example/user_service/repository/OrderRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/user-service/src/main/java/com/example/user_service/service/OrderService.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/user-service/src/test/java/com/example/user_service/UserServiceApplicationTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitattributes" beforeDir="false" afterPath="$PROJECT_DIR$/product-service/.gitattributes" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/product-service/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/product-service/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mvnw" beforeDir="false" afterPath="$PROJECT_DIR$/product-service/mvnw" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mvnw.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/product-service/mvnw.cmd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/spring_product_api/SpringProductApiApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/product-service/src/main/java/com/example/product_service/ProductServiceApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/spring_product_api/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/example/user_service/config/SecurityConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/spring_product_api/controller/AuthController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/spring_product_api/controller/AuthenticationController.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/example/user_service/controller/AuthenticationController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/spring_product_api/controller/ProductController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/spring_product_api/controller/TestController.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/spring_product_api/dto/AuthenticationResponseDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/example/user_service/dto/AuthenticationResponseDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/spring_product_api/dto/LoginRequestDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/example/user_service/dto/LoginRequestDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/spring_product_api/dto/ProductDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/product-service/src/main/java/com/example/product_service/repository/ProductDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/spring_product_api/dto/RegistrationRequestDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/example/user_service/dto/RegistrationRequestDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/spring_product_api/entity/Product.java" beforeDir="false" afterPath="$PROJECT_DIR$/product-service/src/main/java/com/example/product_service/repository/Product.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/spring_product_api/entity/Role.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/spring_product_api/entity/Token.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/example/user_service/entity/Token.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/spring_product_api/entity/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/example/user_service/entity/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/spring_product_api/filter/JwtFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/example/user_service/filter/JwtFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/spring_product_api/handler/CustomAccessDeniedHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/example/user_service/handler/CustomAccessDeniedHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/spring_product_api/handler/CustomLogoutHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/example/user_service/handler/CustomLogoutHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/spring_product_api/repository/ProductRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/product-service/src/main/java/com/example/product_service/repository/ProductRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/spring_product_api/repository/Role.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/spring_product_api/repository/TokenRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/example/user_service/repository/TokenRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/spring_product_api/repository/User.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/spring_product_api/repository/UserDto.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/spring_product_api/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/example/user_service/repository/UserRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/spring_product_api/service/AuthService.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/spring_product_api/service/AuthenticationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/example/user_service/service/AuthenticationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/spring_product_api/service/JwtService.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/example/user_service/service/JwtService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/spring_product_api/service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/product-service/src/main/java/com/example/product_service/service/ProductService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/spring_product_api/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/example/user_service/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/spring_product_api/service/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/java/com/example/user_service/service/UserServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/user-service/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/spring_product_api/SpringProductApiApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/product-service/src/test/java/com/example/product_service/ProductServiceApplicationTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -111,30 +51,30 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "Spring Boot.SpringProductApiApplication.executor": "Run",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/MagicBook/IdeaProjects/spring-store-products-api",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;Spring Boot.SpringProductApiApplication.executor&quot;: &quot;Run&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/MagicBook/IdeaProjects/spring-store-products-api&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "postgresql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;postgresql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\MagicBook\IdeaProjects\spring-store-products-api" />
@@ -207,6 +147,7 @@
       <workItem from="1751453851661" duration="345000" />
       <workItem from="1751492063501" duration="4202000" />
       <workItem from="1751607841233" duration="4211000" />
+      <workItem from="1752144461297" duration="369000" />
     </task>
     <servers />
   </component>
